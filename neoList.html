@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+<script src="neo4j-web.min.js"></script>
+
+<script>
+
+function getEmployees() {
+   var session = driver.session();
+
+  return session
+    .run( 'MATCH (e: Employee) RETURN e.name, e.emp_id;' )
+    .then(
+      result => {
+
+      createTable(result.records);
+
+      var len = result.records.length;
+      console.log(len);
+      document.getElementById("status").value = len + ' node(s)';
+
+      session.close();
+      return result.records; 
+    })
+    .catch(error => {
+      console.log("error");
+      session.close();
+      throw error;
+    });
+}
+
+function createTable(array) {
+    var table = document.getElementById('thisTable');
+    var tbody = table.getElementsByTagName("tbody");
+
+    // clear any prior table and create header row
+
+    tbody[0].innerHTML = ''
+    var row = tbody[0].insertRow();
+    var cell = document.createElement('th');
+    cell.textContent = "Name";
+    row.appendChild(cell);
+
+    cell = document.createElement('th');
+    cell.textContent = "Employee Id";
+    row.appendChild(cell);
+    
+    // create the table rows
+
+    for (var i = 0; i < array.length; i++) {
+        var row = tbody[0].insertRow();
+        var record = array[i];
+        var aName = record.get('e.name');
+        var anId = record.get('e.emp_id'); 
+
+        cell = document.createElement('td');
+        cell.textContent = aName;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.textContent = anId;
+        row.appendChild(cell);
+    }
+}
+</script>
+
+<script>
+const driver = neo4j.v1.driver("bolt://localhost", neo4j.v1.auth.basic("neo4j", "neo4j"));
+const session = driver.session();
+
+getEmployees();
+
+</script>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">
+
+<p>Employee Records</p>
+
+<p>
+<button style="color:green; cursor:pointer" onclick="getEmployees()">Refresh</button>
+</p>
+
+<table border='1' id='thisTable'>
+<tbody>
+</tbody>
+</table>
+
+<br/>
+<input disabled="" id="status" size="24" style="border:0px" >
+<br/>
+
+<br />
+
+</body>
+</html
+
+

@@ -1,0 +1,40 @@
+
+This is a simple demo application using Neo4J to create and display nodes for employee data.  An 
+Employee node consists simply of a name and an employee ID.  Employee ID should be a positive number 
+greater than zero. ID values are not expected to exceed one million.
+
+How to run this demo application:
+
+  1. Clone this repo
+
+  2. Download and install the latest version of Neo4j from https://neo4j.com/download
+
+  3. Launch Neo4j
+
+  4. Select the default project or create a new one, then select 'New Database'.  Choose Local for type, 
+     and then 'Start' the database.
+  
+  4. Using the Chrome browser, open the a URL to the index file in the local directory.  For 
+     example:
+
+          file:///Users/<username>/jandemo/index.html 
+
+  5. From the index page, navigate to the create form to create employe nodes.
+
+  6. Finally, from the list form, display the created employee nodes.
+
+
+A few notes:
+
+   Given the objectives and instructions, there is limited to no data checking. Correct data entry
+   is the responsiblity of the user. 
+
+   For convenience, a copy of the nodejs driver is included in this package.
+
+   This JavaScript application code was tested in Google Chrome Version 63.0.3239.84 on 
+   MacOS with Neo4j 3.1.1.
+
+
+Brad Schoening
+bschoeni@gmail.com
+January 9, 2018
