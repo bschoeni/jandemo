@@ -3,7 +3,7 @@ This is a simple demo application using Neo4J to create and display nodes for em
 Employee node consists simply of a name and an employee ID.  Employee ID should be a positive number 
 greater than zero. ID values are not expected to exceed one million.
 
-How to run this demo application:
+Prepare the demo:
 
   1. Clone this repo
 
@@ -14,14 +14,39 @@ How to run this demo application:
   4. Select the default project or create a new one, then select 'New Database'.  Choose Local for type, 
      and then 'Start' the database.
   
-  4. Using the Chrome browser, open the a URL to the index file in the local directory.  For 
+How to run the REST application:
+
+  1. Check if you have Python 2.7.x available:
+
+     	% python --version
+
+  2. Check if you have the necessary Python packages available for 'web.py' and 'neo4jdriver'.  If the 
+     packages are not present you may use pip (pip install web.py; pip install neo4jdriver) or
+     another package installer
+
+  3. Next, start the REST server script:
+
+	% python neoREST.py 
+
+  4. Using 'curl' or the tool of your choice, run the GET operation on the resource 'employees':
+
+	% curl -X GET http://localhost:8080/employees
+
+  5. Using 'curl', add a new employe record:
+
+        % curl -d "name=<NAME>&id=<ID>" -X POST http://localhost:8080/employees
+
+
+How to run the demo UI application:
+
+  1. Using the Chrome browser, open the a URL to the index file in the local directory.  For 
      example:
 
           file:///Users/<username>/jandemo/index.html 
 
-  5. From the index page, navigate to the create form to create employe nodes.
+  2. From the index page, navigate to the create form to create employe nodes.
 
-  6. Finally, from the list form, display the created employee nodes.
+  3. Finally, from the list form, display the created employee nodes.
 
 
 A few notes:
